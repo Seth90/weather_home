@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Jura&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jura&family=Roboto+Flex:opsz@8..144&display=swap");
+body {
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.mr20 {
+  margin-right: 20px;
+}
+
+.errorMessages {
+  position: absolute;
+  right: 20px;
+  text-align: right;
+  color: red;
+}
+.errorMessages__yandex {
+  margin-top: 10px;
+}
+.errorMessages__accu {
+  margin-top: 10px;
+}
+.errorMessages__air {
+  margin-top: 10px;
+}
+
+.weather {
+  max-width: 50%;
+}
+
+.container {
+  margin: auto;
+  color: #202020;
+  font-family: "Roboto Flex", sans-serif;
+}
+.container h2 {
+  text-align: center;
+  font-size: 30px;
+}
+
+.top_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  color: #202020;
+}
+.top img {
+  float: left;
+  width: 150px;
+  height: 150px;
+}
+.top .weather__main {
+  font-size: 100px;
+}
+.top .weather__celcium {
+  font-size: 50px;
+}
+
+.weather__highlow {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: -40px;
+  margin-left: 140px;
+}
+
+.weather__condition {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.weather__updatetime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  margin: 10px 0;
+}
+.weather__updatetime img {
+  display: block;
+  margin-right: 10px;
+  width: 50px;
+  height: 30px;
+}
+.weather__updatetime span {
+  margin-right: 5px;
+}
+
+.weather__details {
+  color: #202020;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 700px;
+  margin: auto;
+  font-size: 20px;
+}
+.weather__details div {
+  margin: 5px 15px;
+}
+
+.weather__forecast {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+}
+.weather__forecast img {
+  width: 50px;
+  height: 50px;
+}
+
+.temp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.temp__high {
+  margin-right: 10px;
+}
+
+.datetime {
+  display: flex;
+  justify-content: space-between;
+  align-items: centers;
+  width: 50%;
+  text-align: right;
+  margin-top: -110px;
+}
+.datetime__time {
+  font-size: 100px;
+}
+.datetime_weekday {
+  font-size: 30px;
+}
+.datetime__date {
+  font-size: 30px;
+}
+
+.lp {
+  width: 50%;
+  height: 50px;
+}
+
+.rp {
+  margin: auto;
+  text-align: center;
+}/*# sourceMappingURL=main.css.map */

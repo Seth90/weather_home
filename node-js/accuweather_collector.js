@@ -5,20 +5,20 @@ const path = require('path');
 
 //Ivanovo 57.000353, 40.973930//
 
-const URL = 'https://api.weather.yandex.ru/v2/informers?lat=57.000353&lon=40.973930';
-const API_KEY = keys.yandex;
+const URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/288066?apikey=APIKEY&details=true&metric=true';
+const API_KEY = keys.accuweather;
 
-const data_filename = 'ya_w.json';
+const data_filename = 'accu_w.json';
 
 const headers = {
     'Content-Type' : 'application/json',
-    'X-Yandex-API-Key': API_KEY
+    //'X-Yandex-API-Key': API_KEY
 }
 
 //const createPath = (folder) => path.resolve(__dirname, folder);
 
 const getData = () => {
-    fetch(URL, {headers : headers})
+    fetch(URL.replace('APIKEY', API_KEY), {headers : headers})
         .then(res => res.json())
         .then(json => {
           if (fs.existsSync('./node-js/data')) {

@@ -7,3 +7,18 @@ body {
 .mr20 {
     margin-right: 20px;
 }
+.errorMessages {
+  position: absolute;
+  right: 20px;
+  text-align: right;
+  color: red;
+  &__yandex {
+    margin-top: 10px;
+  };
+  &__accu {
+    margin-top: 10px;
+  }
+  &__air {
+    margin-top: 10px;
+  }
+}

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
-    <link rel="stylesheet" href="../scss/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <script src="https://unpkg.com/vue@next" defer></script>
     <script src="../js/app_vue.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -15,8 +15,13 @@
     <div id="res"></div>
     <!-- weather -->
     <section>
+        <div class="errorMessages">
+          <div class="errorMessages__yandex hidden">error</div>
+          <div class="errorMessages__accu hidden ">error</div>
+          <div class="errorMessages__air hidden">error</div>
+        </div>
         <div id="app">
-            <button v-on:click="GetData">Обновить</button>
+            <button v-on:click="GetYandexData">Обновить</button>
             <div class="container">
                 <h2>{{city}}</h2>
                 <div class="top_main">
