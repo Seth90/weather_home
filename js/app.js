@@ -4,7 +4,23 @@ const swiper = new Swiper('.swiper', {
   loop: true,
   autoplay: {
     delay: 2000,
-  }
+  },
+  on: {
+
+    slideChangeTransitionStart: function(swiper) {
+        let $wrapperEl = swiper.$wrapperEl;
+        let params = swiper.params;
+        $wrapperEl.children(('.' + (params.slideClass) + '.' + (params.slideDuplicateClass)))
+            .each(function() {
+                let idx = this.getAttribute('data-swiper-slide-index');
+                this.innerHTML = $wrapperEl.children('.' + params.slideClass + '[data-swiper-slide-index="' + idx + '"]:not(.' + params.slideDuplicateClass + ')').html();
+            });
+    },
+
+    slideChangeTransitionEnd: function(swiper) {
+        swiper.slideToLoop(swiper.realIndex, 0, false);
+    }
+}
 });
 
 /*let options = {

@@ -73,53 +73,60 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <div class="weather__forecast">
-                                    <div class="weather__forecast-item">
-                                        <div class="period">04.11 Пн</div>
-                                        <img src="../imgs/1.png" alt="">
-                                        <div class="temp">
-                                            <div class="temp__high">10&deg;</div>
-                                            <div class="temp__low">-10&deg;</div>
+                                          <!-- START FORECAST ITEMS -->
+                                          <template v-for="item in accuForecast">
+                                            <div class="weather__forecast-item">
+                                              <div class="period">{{item.epochDate}}</div>
+                                              <img src="../imgs/1.png" alt="">
+                                              <div class="temp">
+                                                  <div class="temp__high">{{item.tempMax}}&deg;</div>
+                                                  <div class="temp__low">{{item.tempMin}}&deg;</div>
+                                              </div>
+                                              <div class="condition">{{item.iconPhrase}}</div>
+                                            </div>
+                                          </template>
+                                          <!--
+                                          <div class="weather__forecast-item">
+                                              <div class="period">05.11 Вт</div>
+                                              <img src="../imgs/1.png" alt="">
+                                              <div class="temp">
+                                                  <div class="temp__high">10&deg;</div>
+                                                  <div class="temp__low">-10&deg;</div>
+                                              </div>
+                                              <div class="condition">Небольшой дождь</div>
+                                          </div>
+                                          <div class="weather__forecast-item">
+                                              <div class="period">06.11 Ср</div>
+                                              <img src="../imgs/1.png" alt="">
+                                              <div class="temp">
+                                                  <div class="temp__high">10&deg;</div>
+                                                  <div class="temp__low">-10&deg;</div>
+                                              </div>
+                                              <div class="condition">Небольшой дождь</div>
+                                          </div>
+                                          <div class="weather__forecast-item">
+                                              <div class="period">07.11 Чт</div>
+                                              <img src="../imgs/1.png" alt="">
+                                              <div class="temp">
+                                                  <div class="temp__high">10&deg;</div>
+                                                  <div class="temp__low">-10&deg;</div>
+                                              </div>
+                                              <div class="condition">Небольшой дождь</div>
+                                          </div>
+                                          <div class="weather__forecast-item">
+                                              <div class="period">08.11 Пт</div>
+                                              <img src="../imgs/1.png" alt="">
+                                              <div class="temp">
+                                                  <div class="temp__high">10&deg;</div>
+                                                  <div class="temp__low">-10&deg;</div>
+                                              </div>
+                                              <div class="condition">Небольшой дождь</div>
+                                          </div>
+                                          -->
+                                          <!-- END FORECAST ITEMS -->
                                         </div>
-                                        <div class="condition">Небольшой дождь</div>
                                     </div>
-                                    <div class="weather__forecast-item">
-                                        <div class="period">05.11 Вт</div>
-                                        <img src="../imgs/1.png" alt="">
-                                        <div class="temp">
-                                            <div class="temp__high">10&deg;</div>
-                                            <div class="temp__low">-10&deg;</div>
-                                        </div>
-                                        <div class="condition">Небольшой дождь</div>
-                                    </div>
-                                    <div class="weather__forecast-item">
-                                        <div class="period">06.11 Ср</div>
-                                        <img src="../imgs/1.png" alt="">
-                                        <div class="temp">
-                                            <div class="temp__high">10&deg;</div>
-                                            <div class="temp__low">-10&deg;</div>
-                                        </div>
-                                        <div class="condition">Небольшой дождь</div>
-                                    </div>
-                                    <div class="weather__forecast-item">
-                                        <div class="period">07.11 Чт</div>
-                                        <img src="../imgs/1.png" alt="">
-                                        <div class="temp">
-                                            <div class="temp__high">10&deg;</div>
-                                            <div class="temp__low">-10&deg;</div>
-                                        </div>
-                                        <div class="condition">Небольшой дождь</div>
-                                    </div>
-                                    <div class="weather__forecast-item">
-                                        <div class="period">08.11 Пт</div>
-                                        <img src="../imgs/1.png" alt="">
-                                        <div class="temp">
-                                            <div class="temp__high">10&deg;</div>
-                                            <div class="temp__low">-10&deg;</div>
-                                        </div>
-                                        <div class="condition">Небольшой дождь</div>
-                                    </div>
-                                        </div>
-                                    </div>
+
                                     <div class="swiper-slide">
                                         <div class="weather__forecast">
                                             <div class="weather__forecast-item mr20s">

@@ -28,7 +28,17 @@ const app = {
                 tempMax:0,
                 condition: 'none'
             }
-        ]
+        ],
+        accuForecast: new Array(5).fill(
+          {
+            date: "2022-11-07T07:00:00+03:00",
+            epochDate: 1667793600,
+            tempMin: -99,
+            tempMax: -99,
+            icon: 12,
+            iconPhrase: 'Rain'
+          }
+        )
       }
     },
     methods: {
@@ -78,17 +88,51 @@ const app = {
                 divError.classList.remove('hidden');
                 divError.innerHTML = 'Ошибка получения данных с ресурса: Yandex';
             }
-            }, 5000);
+            }, 1000);
               
         },
         GetAccuWeatherForecast () {
-          return 0
+          let divError = document.getElementsByClassName('errorMessages__accu')[0];
+            let options = {
+                method: 'GET',      
+                headers: {}
+              };
+              
+            setInterval(async () => {
+              try {
+                const response = await fetch('http://127.0.0.1:3000/accu_data', options);
+                if (response.ok) {
+                  const json = await response.json();
+                  json.DailyForecasts.forEach((item, i) => {
+                    this.accuForecast[i].epochDate = item.EpochDate;
+                    console.log(i)
+                    this.accuForecast[i].tempMin = item.Temperature.Minimum.Value;
+                    //console.log(this.accuForecast[i].tempMin)
+                    this.accuForecast[i].tempMax = item.Temperature.Maximum.Value;
+                    this.accuForecast[i].iconPhrase = item.Day.IconPhrase;
+                    //console.log(this.accuForecast[i].iconPhrase)
+                  });
+                 
+                  console.log('GetAccuData - OK')
+                  divError.classList.add('hidden');
+                }
+                else {
+                  divError.classList.remove('hidden');
+                  divError.innerHTML = 'Ошибка получения данных с ресурса: AccuWeather';
+                }
+            }
+            catch {
+                divError.classList.remove('hidden');
+                divError.innerHTML = 'Ошибка получения данных с ресурса: AccuWeather';
+            }
+            }, 1000);
         },
         GetOpenWeatherAirData () {
           return 0
         },
         Todo (){
-          this.GetYandexData();
+          //this.GetYandexData();
+          //this.GetAccuWeatherForecast();
         }
     },
     mounted: function(){
