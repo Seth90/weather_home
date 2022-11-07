@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../scss/main.css">
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="../js/app_vue.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="../js/app.js" defer></script>
+<body>
+    <div id="res"></div>
+    <!-- weather -->
+    <section>
+        <div id="app">
+            <button v-on:click="GetData">Обновить</button>
+            <div class="container">
+                <h2>{{city}}</h2>
+                <div class="top_main">
+                    <div class="weather">
+                        <div class="weather__current">
+                            <div class="top">
+                                <img src="../imgs/cloudy.png" alt="">
+                                <div class="weather__main">
+                                    {{currentTemp}}
+                                </div>
+                                <div class="weather__celcium">
+                                    &deg;C
+                                </div>
+                            </div>
+                            <div class="weather__highlow">
+                                &uarr; {{thisDayHighTemp}}&deg;&nbsp;&nbsp; &darr;{{thisDayLowTemp}}&deg;
+                            </div>
+                            <div class="weather__condition">
+                                {{currentCondition}}
+                            </div>
+                            <div class="weather__updatetime">
+                                <span>Обновлено в {{updateTime}}</span>
+                                <img src="../imgs/Yandex-Logo.png" alt="">
+                            </div>
+
+                            <div class="weather__details">
+                                    <div>
+                                        <span>По ощущениям {{feelsLike}}&deg;</span>
+                                    </div>
+                                    <div>
+                                        <span>Ветер </span>
+                                        <img src="" alt="">
+                                        <span>{{windSpeed}} м/с</span>
+                                    </div>
+                                    <div>
+                                        <span>Видимость {{visibilityRange}} км</span>
+                                    </div>
+                                    <div>
+                                        <span>Давление {{pressure}} мм</span>
+                                    </div>
+                                    <div>
+                                        <span>Влажность {{humidity}} %</span>
+                                    </div>
+                                    <div>
+                                        <span>Точка росы {{dewPoint}}&deg;</span>
+                                    </div>
+                            </div>
+                            <div class="swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="weather__forecast">
+                                    <div class="weather__forecast-item">
+                                        <div class="period">04.11 Пн</div>
+                                        <img src="../imgs/1.png" alt="">
+                                        <div class="temp">
+                                            <div class="temp__high">10&deg;</div>
+                                            <div class="temp__low">-10&deg;</div>
+                                        </div>
+                                        <div class="condition">Небольшой дождь</div>
+                                    </div>
+                                    <div class="weather__forecast-item">
+                                        <div class="period">05.11 Вт</div>
+                                        <img src="../imgs/1.png" alt="">
+                                        <div class="temp">
+                                            <div class="temp__high">10&deg;</div>
+                                            <div class="temp__low">-10&deg;</div>
+                                        </div>
+                                        <div class="condition">Небольшой дождь</div>
+                                    </div>
+                                    <div class="weather__forecast-item">
+                                        <div class="period">06.11 Ср</div>
+                                        <img src="../imgs/1.png" alt="">
+                                        <div class="temp">
+                                            <div class="temp__high">10&deg;</div>
+                                            <div class="temp__low">-10&deg;</div>
+                                        </div>
+                                        <div class="condition">Небольшой дождь</div>
+                                    </div>
+                                    <div class="weather__forecast-item">
+                                        <div class="period">07.11 Чт</div>
+                                        <img src="../imgs/1.png" alt="">
+                                        <div class="temp">
+                                            <div class="temp__high">10&deg;</div>
+                                            <div class="temp__low">-10&deg;</div>
+                                        </div>
+                                        <div class="condition">Небольшой дождь</div>
+                                    </div>
+                                    <div class="weather__forecast-item">
+                                        <div class="period">08.11 Пт</div>
+                                        <img src="../imgs/1.png" alt="">
+                                        <div class="temp">
+                                            <div class="temp__high">10&deg;</div>
+                                            <div class="temp__low">-10&deg;</div>
+                                        </div>
+                                        <div class="condition">Небольшой дождь</div>
+                                    </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="weather__forecast">
+                                            <div class="weather__forecast-item mr20s">
+                                                <div class="period">{{parts[0].partName}}</div>
+                                                <img src="../imgs/1.png" alt="">
+                                                <div class="temp">
+                                                    <div class="temp__high">{{parts[0].tempMax}}&deg;</div>
+                                                    <div class="temp__low">{{parts[0].tempMin}}&deg;</div>
+                                                </div>
+                                                <div class="condition">{{parts[0].condition}}</div>
+                                            </div>
+                                            <div class="weather__forecast-item">
+                                                <div class="period">{{parts[1].partName}}</div>
+                                                <img src="../imgs/1.png" alt="">
+                                                <div class="temp">
+                                                    <div class="temp__high">{{parts[1].tempMax}}&deg;</div>
+                                                    <div class="temp__low">{{parts[1].tempMin}}&deg;</div>
+                                                </div>
+                                                <div class="condition">{{parts[1].condition}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="datetime">
+                        <div class="lp"></div>
+                        <div class="rp">
+                            <div class="datetime__time">17:58</div>
+                            <div class="datetime_weekday">Понедельник</div>
+                            <div class="datetime__date">04 ноября 2022</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end weather-->
+
+
+
+    <!--<script src="../js/app.js"></script>-->
+</body>
+
+</html>

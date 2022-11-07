@@ -1,0 +1,26 @@
+.datetime {
+    display: flex;
+    justify-content: space-between;
+    align-items: centers;
+    width: 50%;
+    text-align: right;
+    margin-top: -110px;
+    &__time {
+        font-size: 100px;        
+    }
+    &_weekday {
+        font-size: 30px;
+    }
+    &__date {
+        font-size: 30px;
+    }
+}
+.lp {
+    width: 50%;
+    height: 50px;
+}
+.rp {
+    margin: auto;
+    text-align: center;
+}
+

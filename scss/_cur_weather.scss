@@ -1,0 +1,102 @@
+$text-color: #202020;
+
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura&family=Roboto+Flex:opsz@8..144&display=swap');
+.weather {
+    max-width: 50%;
+}
+.container {
+    //width: 1200px;
+    margin: auto;
+    h2 {
+        text-align: center;
+        font-size: 30px;
+    }
+    color: $text-color;
+    font-family: 'Roboto Flex', sans-serif;
+}
+.top_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top {
+    display: flex;
+    justify-content: center;
+    color: $text-color;
+    img {
+        float: left;
+        width: 150px;
+        height: 150px;
+    }
+    .weather__main {
+        font-size: 100px;
+    }
+    .weather__celcium {
+        font-size: 50px;
+    }
+}
+.weather__highlow {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: -40px;
+    margin-left: 140px;
+}
+.weather__condition {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.weather__updatetime {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0;
+    img {
+        display: block;
+        margin-right: 10px;
+        width: 50px;
+        height: 30px;
+    }
+    span {
+        margin-right: 5px;
+    }
+}
+.weather__details {
+    color: $text-color;
+    font-weight: bold;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 700px;
+    margin: auto;
+    font-size: 20px;
+    div {
+        margin: 5px 15px;
+    }
+    
+}
+.weather__forecast {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+.temp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.temp__high {
+    margin-right: 10px;
+}
