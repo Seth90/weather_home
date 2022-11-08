@@ -1,3 +1,18 @@
+const partsTranslate = {
+  'morning': 'Утро',
+  'day': 'День',
+  'evening': 'Вечер',
+  'night': 'Ночь'
+}
+const weekdayShortTranslate = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+const weekdayFullTranslate = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+const conditionTranslate = {
+  'overcast': 'Пасмурно',
+  'rain': 'Дождь',
+  'cloudy': 'Облачно'
+}
+const rusMonth = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+
 const app = {
     data() {
       return {
@@ -33,7 +48,7 @@ const app = {
           {
             id: 0,
             date: "2022-11-07T07:00:00+03:00",
-            epochDate: 1667793600,
+            epochDate: '',
             tempMin: -99,
             tempMax: -99,
             icon: 12,
@@ -44,6 +59,7 @@ const app = {
     },
     methods: {
         GetYandexData () {
+          
           let divError = document.getElementsByClassName('errorMessages__yandex hidden')[0];
             let options = {
                 method: 'GET',      
@@ -68,15 +84,21 @@ const app = {
                   this.humidity = json.fact.humidity;
                   this.dewPoint = 'N';
 
-                  this.parts[0].partName = json.forecast.parts[0].part_name;
+                  this.parts[0].partName = partsTranslate[json.forecast.parts[0].part_name];
                   this.parts[0].tempMin = json.forecast.parts[0].temp_min;
                   this.parts[0].tempMax = json.forecast.parts[0].temp_max;
-                  this.parts[0].condition = json.forecast.parts[0].condition;
+                  if (conditionTranslate[json.forecast.parts[0].condition])
+                    this.parts[0].condition = conditionTranslate[json.forecast.parts[0].condition];
+                  else
+                    this.parts[0].condition = json.forecast.parts[0].condition;
 
-                  this.parts[1].partName = json.forecast.parts[1].part_name;
+                  this.parts[1].partName = partsTranslate[json.forecast.parts[1].part_name];
                   this.parts[1].tempMin = json.forecast.parts[1].temp_min;
                   this.parts[1].tempMax = json.forecast.parts[1].temp_max;
-                  this.parts[1].condition = json.forecast.parts[1].condition;
+                  if (conditionTranslate[json.forecast.parts[1].condition])
+                    this.parts[1].condition = conditionTranslate[json.forecast.parts[1].condition];
+                  else
+                    this.parts[1].condition = json.forecast.parts[1].condition;
                   
                   console.log('GetYandexData - OK')
                   divError.classList.add('hidden');
@@ -93,7 +115,7 @@ const app = {
                 divError.classList.remove('hidden');
                 divError.innerHTML = 'Ошибка получения данных с ресурса: Yandex';
             }
-            }, 1000);
+            }, 30000);
               
         },
         GetAccuWeatherForecast () {
@@ -111,10 +133,21 @@ const app = {
               if (response.ok) {
                   const json = await response.json();
                   json.DailyForecasts.forEach((item, i) => {
-                    this.accuForecast[i].epochDate = item.EpochDate;
-                    this.accuForecast[i].tempMin = item.Temperature.Minimum.Value;
-                    this.accuForecast[i].tempMax = item.Temperature.Maximum.Value;
+                    let date = new Date(item.EpochDate * 1000);
+                    console.log(item.EpochDate);
+                    console.log(date);
+                    this.accuForecast[i].epochDate = `${date.getDate()}.${date.getMonth() + 1} ${weekdayShortTranslate[date.getDay()]}`;
+                    let maxtemp = Math.round(item.Temperature.Maximum.Value), 
+                        mintemp = Math.round(item.Temperature.Minimum.Value);
+                    this.accuForecast[i].tempMin = mintemp;
+                    this.accuForecast[i].tempMax = maxtemp;
                     this.accuForecast[i].iconPhrase = item.Day.IconPhrase;
+
+                    if (i === 0) {
+                      this.thisDayHighTemp = maxtemp;
+                      this.thisDayLowTemp = mintemp;
+                    }
+                    
                   });           
                   console.log('GetAccuData - OK')
                   divError.classList.add('hidden');
@@ -126,17 +159,18 @@ const app = {
                   divError.innerHTML = 'Ошибка получения данных с ресурса: AccuWeather';
                 }
             }
-            catch {
+            catch (err) {
                 divError.classList.remove('hidden');
                 divError.innerHTML = 'Ошибка получения данных с ресурса: AccuWeather';
+                console.log(err);
             }
-            }, 5000);
+            }, 30000);
         },
         GetOpenWeatherAirData () {
           return 0
         },
         Todo (){
-          this.GetYandexData();
+          //this.GetYandexData();
           this.GetAccuWeatherForecast();
         }
     },
@@ -148,4 +182,13 @@ const app = {
 
 
 Vue.createApp(app).mount('#app')
+
+function SetTime(){
+  let currentDate = new Date();
+  document.getElementById('time').innerText = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+  document.getElementById('dayOfWeek').innerText = `${weekdayFullTranslate[currentDate.getDay()]}`;
+  document.getElementById('date').innerText = `${currentDate.getDate()} ${rusMonth[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+}
+
+setInterval(SetTime(), 30000);
 
