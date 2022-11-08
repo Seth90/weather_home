@@ -1,7 +1,6 @@
-$text-color: #202020;
+//$text-color: #202020;
+$text-color: white;
 
-@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jura&family=Roboto+Flex:opsz@8..144&display=swap');
 .weather {
     max-width: 50%;
 }
@@ -11,9 +10,10 @@ $text-color: #202020;
     h2 {
         text-align: center;
         font-size: 30px;
+        font-weight: normal;
     }
     color: $text-color;
-    font-family: 'Roboto Flex', sans-serif;
+    font-family: 'Poiret One', cursive;
 }
 .top_main {
     display: flex;
@@ -26,7 +26,7 @@ $text-color: #202020;
     color: $text-color;
     img {
         float: left;
-        width: 150px;
+        width: 250px;
         height: 150px;
     }
     .weather__main {
@@ -41,18 +41,21 @@ $text-color: #202020;
     font-size: 25px;
     font-weight: bold;
     margin-top: -40px;
-    margin-left: 140px;
+    margin-left: 210px;
 }
 .weather__condition {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+    margin-top: 20px;
 }
 .weather__updatetime {
+    color: $text-color;
+
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    text-align: center;
+    text-align: left;
     font-size: 20px;
     margin: 10px 0;
     img {
@@ -67,14 +70,14 @@ $text-color: #202020;
 }
 .weather__details {
     color: $text-color;
-    font-weight: bold;
+    //font-weight: bold;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     max-width: 700px;
     margin: auto;
-    font-size: 20px;
+    font-size: 15px;
     div {
         margin: 5px 15px;
     }
@@ -86,7 +89,7 @@ $text-color: #202020;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    font-weight: bold;
+    font-weight: normal;
     img {
         width: 50px;
         height: 50px;

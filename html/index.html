@@ -21,14 +21,17 @@
           <div class="errorMessages__air hidden">error</div>
         </div>
         <div id="app">
-            <button v-on:click="GetYandexData">Обновить</button>
+            <div class="weather__updatetime">
+              <span>Обновлено в {{updateTime}}</span>
+              <img src="../imgs/Yandex-Logo.png" alt="">
+            </div>
             <div class="container">
-                <h2>{{city}}</h2>
+                
                 <div class="top_main">
                     <div class="weather">
                         <div class="weather__current">
                             <div class="top">
-                                <img src="../imgs/cloudy.png" alt="">
+                                <img src="../imgs/01-s.png" alt="">
                                 <div class="weather__main">
                                     {{currentTemp}}
                                 </div>
@@ -42,10 +45,7 @@
                             <div class="weather__condition">
                                 {{currentCondition}}
                             </div>
-                            <div class="weather__updatetime">
-                                <span>Обновлено в {{updateTime}}</span>
-                                <img src="../imgs/Yandex-Logo.png" alt="">
-                            </div>
+
 
                             <div class="weather__details">
                                     <div>
@@ -118,6 +118,7 @@
                     <div class="datetime">
                         <div class="lp"></div>
                         <div class="rp">
+                            <h2>{{city}}</h2>
                             <div class="datetime__time" id="time">17:58</div>
                             <div class="datetime_weekday" id="dayOfWeek">Понедельник</div>
                             <div class="datetime__date" id="date">04 ноября 2022</div>

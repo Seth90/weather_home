@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Jura&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Jura&family=Roboto+Flex:opsz@8..144&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 body {
-  background-color: white;
+  background-color: black;
+  font-family: "Poiret One", cursive;
 }
 
 .hidden {
@@ -34,12 +36,13 @@ body {
 
 .container {
   margin: auto;
-  color: #202020;
-  font-family: "Roboto Flex", sans-serif;
+  color: white;
+  font-family: "Poiret One", cursive;
 }
 .container h2 {
   text-align: center;
   font-size: 30px;
+  font-weight: normal;
 }
 
 .top_main {
@@ -51,11 +54,11 @@ body {
 .top {
   display: flex;
   justify-content: center;
-  color: #202020;
+  color: white;
 }
 .top img {
   float: left;
-  width: 150px;
+  width: 250px;
   height: 150px;
 }
 .top .weather__main {
@@ -70,20 +73,22 @@ body {
   font-size: 25px;
   font-weight: bold;
   margin-top: -40px;
-  margin-left: 140px;
+  margin-left: 210px;
 }
 
 .weather__condition {
   text-align: center;
   font-size: 30px;
   font-weight: bold;
+  margin-top: 20px;
 }
 
 .weather__updatetime {
+  color: white;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  text-align: center;
+  text-align: left;
   font-size: 20px;
   margin: 10px 0;
 }
@@ -98,15 +103,14 @@ body {
 }
 
 .weather__details {
-  color: #202020;
-  font-weight: bold;
+  color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   max-width: 700px;
   margin: auto;
-  font-size: 20px;
+  font-size: 15px;
 }
 .weather__details div {
   margin: 5px 15px;
@@ -118,7 +122,7 @@ body {
   justify-content: space-around;
   align-items: center;
   text-align: center;
-  font-weight: bold;
+  font-weight: normal;
 }
 .weather__forecast img {
   width: 50px;
@@ -144,13 +148,14 @@ body {
   margin-top: -110px;
 }
 .datetime__time {
-  font-size: 100px;
+  font-size: 70px;
 }
 .datetime_weekday {
-  font-size: 30px;
+  font-size: 20px;
 }
 .datetime__date {
-  font-size: 30px;
+  font-size: 25px;
+  margin-top: 5px;
 }
 
 .lp {

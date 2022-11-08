@@ -19,7 +19,7 @@ const app = {
         error: true,
         erorrLst: '',
         city: 'Иваново',
-        currentTemp: -1,
+        currentTemp: 0,
         currentCondition: 'Облачно',
         thisDayHighTemp: 5,
         thisDayLowTemp: -1,
@@ -48,7 +48,7 @@ const app = {
           {
             id: 0,
             date: "2022-11-07T07:00:00+03:00",
-            epochDate: '',
+            epochDate: '99.99 Пн',
             tempMin: -99,
             tempMax: -99,
             icon: 12,
@@ -185,7 +185,8 @@ Vue.createApp(app).mount('#app')
 
 function SetTime(){
   let currentDate = new Date();
-  document.getElementById('time').innerText = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+  let minutes = currentDate.getMinutes() < 10 ? '0' + currentDate.getMinutes() : currentDate.getMinutes();
+  document.getElementById('time').innerText = `${currentDate.getHours()}:${minutes}`;
   document.getElementById('dayOfWeek').innerText = `${weekdayFullTranslate[currentDate.getDay()]}`;
   document.getElementById('date').innerText = `${currentDate.getDate()} ${rusMonth[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
 }
