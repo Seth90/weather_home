@@ -7,9 +7,27 @@ const partsTranslate = {
 const weekdayShortTranslate = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 const weekdayFullTranslate = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 const conditionTranslate = {
-  'overcast': 'Пасмурно',
-  'rain': 'Дождь',
-  'cloudy': 'Облачно'
+  'overcast': ['Пасмурно', '08-s.png'],
+  'dreary': ['Пасмурно', '08-s.png'],
+  'mostly cloudy': ['Облачно с прояснениями', '03-s.png'],
+  'clear': ['Ясно', '01-s.png'],
+  'partly-cloudy': ['Малооблачно', '01-s.png'],
+  'cloudy': ['Облачно с прояснениями', '03-s.png'],
+  'drizzle': ['Морось', '14-s.png'],
+  'light-rain': ['Небольшой дождь', '12-s.png'],
+  'rain': ['Дождь', '18-s.png'],
+  'moderate-rain': ['Умеренно сильный дождь', '12-s.png'],
+  'heavy-rain': ['Сильный дождь', '15-s.png'],
+  'continuous-heavy-rain': ['Длительный сильный дождь', '15-s.png'],
+  'showers': ['Ливень', '12-s.png'],
+  'wet-snow': ['Дождь со снегом', '29-s.png'],
+  'light-snow': ['Небольшой снег', '22-s.png'],
+  'snow': ['Снег', '22-s.png'],
+  'snow-showers': ['Снегопад', '22-s.png'],
+  'hail': ['Град', '26-s.png'],
+  'thunderstorm': ['Гроза', '15-s.png'],
+  'thunderstorm-with-rain': ['Дождь с грозой', '15-s.png'],
+  'thunderstorm-with-hail': ['Гроза с градом', '15-s.png']
 }
 const rusMonth = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
 
@@ -21,6 +39,7 @@ const app = {
         city: 'Иваново',
         currentTemp: 0,
         currentCondition: 'Облачно',
+        icon: '01-s.png',
         thisDayHighTemp: 5,
         thisDayLowTemp: -1,
         updateTime: '12:28',
@@ -32,12 +51,14 @@ const app = {
         dewPoint: -6,
         parts: [
             {
+                icon: '01-s.png',
                 partName: 'evening',
                 tempMin: 0,
                 tempMax:0,
                 condition: 'none'
             },
             {
+                icon: '01-s.png',
                 partName: 'day',
                 tempMin: 0,
                 tempMax:0,
@@ -47,6 +68,7 @@ const app = {
         accuForecast: new Array(5).fill().map(item => (
           {
             id: 0,
+            iconPath: '01-s.png',
             date: "2022-11-07T07:00:00+03:00",
             epochDate: '99.99 Пн',
             tempMin: -99,
@@ -72,9 +94,15 @@ const app = {
                 if (response.ok) {
                   const json = await response.json();
                   this.currentTemp = json.fact.temp;
-                  this.currentCondition = json.fact.condition;
-                  this.thisDayHighTemp = 'N';
-                  this.thisDayLowTemp = 'N';
+                  //this.currentCondition = json.fact.condition;
+                  if (conditionTranslate[json.fact.condition]){
+                    this.currentCondition = conditionTranslate[json.fact.condition][0];
+                    this.icon = conditionTranslate[json.fact.condition][1];
+                  }
+                  else
+                    this.currentCondition = json.fact.condition;
+                  //this.thisDayHighTemp = 'N';
+                  //this.thisDayLowTemp = 'N';
                   let date = new Date(json.fact.obs_time);
                   this.updateTime = `${date.getHours()}:${date.getMinutes()}`;
                   this.feelsLike = json.fact.feels_like;
@@ -88,19 +116,22 @@ const app = {
                   this.parts[0].tempMin = json.forecast.parts[0].temp_min;
                   this.parts[0].tempMax = json.forecast.parts[0].temp_max;
                   if (conditionTranslate[json.forecast.parts[0].condition])
-                    this.parts[0].condition = conditionTranslate[json.forecast.parts[0].condition];
+                    this.parts[0].condition = conditionTranslate[json.forecast.parts[0].condition][0];
                   else
                     this.parts[0].condition = json.forecast.parts[0].condition;
+                  this.parts[0].icon = conditionTranslate[json.forecast.parts[0].condition][1],
 
                   this.parts[1].partName = partsTranslate[json.forecast.parts[1].part_name];
                   this.parts[1].tempMin = json.forecast.parts[1].temp_min;
                   this.parts[1].tempMax = json.forecast.parts[1].temp_max;
                   if (conditionTranslate[json.forecast.parts[1].condition])
-                    this.parts[1].condition = conditionTranslate[json.forecast.parts[1].condition];
+                    this.parts[1].condition = conditionTranslate[json.forecast.parts[1].condition][0];
                   else
                     this.parts[1].condition = json.forecast.parts[1].condition;
+
+                  this.parts[1].icon = conditionTranslate[json.forecast.parts[1].condition][1],
                   
-                  console.log('GetYandexData - OK')
+                  //console.log('GetYandexData - OK')
                   divError.classList.add('hidden');
 
                   swiper.loopDestroy();
@@ -111,11 +142,12 @@ const app = {
                   divError.innerHTML = 'Ошибка получения данных с ресурса: Yandex';
                 }
             }
-            catch {
+            catch (err) {
                 divError.classList.remove('hidden');
                 divError.innerHTML = 'Ошибка получения данных с ресурса: Yandex';
+                console.log(err);
             }
-            }, 30000);
+            }, 5000);
               
         },
         GetAccuWeatherForecast () {
@@ -134,14 +166,22 @@ const app = {
                   const json = await response.json();
                   json.DailyForecasts.forEach((item, i) => {
                     let date = new Date(item.EpochDate * 1000);
-                    console.log(item.EpochDate);
-                    console.log(date);
+                    //console.log(item.EpochDate);
+                    //console.log(date);
                     this.accuForecast[i].epochDate = `${date.getDate()}.${date.getMonth() + 1} ${weekdayShortTranslate[date.getDay()]}`;
                     let maxtemp = Math.round(item.Temperature.Maximum.Value), 
                         mintemp = Math.round(item.Temperature.Minimum.Value);
                     this.accuForecast[i].tempMin = mintemp;
                     this.accuForecast[i].tempMax = maxtemp;
-                    this.accuForecast[i].iconPhrase = item.Day.IconPhrase;
+                    if (conditionTranslate[item.Day.IconPhrase.toLowerCase()]) {
+                      this.accuForecast[i].iconPhrase = conditionTranslate[item.Day.IconPhrase.toLowerCase()][0];
+                    }
+                    else {
+                      this.accuForecast[i].iconPhrase = item.Day.IconPhrase;
+                    }
+                    
+                    let iconp = item.Day.Icon;
+                    this.accuForecast[i].iconPath = iconp < 10 ? `0${iconp}-s.png` : `${iconp}-s.png`;
 
                     if (i === 0) {
                       this.thisDayHighTemp = maxtemp;
@@ -149,7 +189,7 @@ const app = {
                     }
                     
                   });           
-                  console.log('GetAccuData - OK')
+                  //console.log('GetAccuData - OK')
                   divError.classList.add('hidden');
                   swiper.loopDestroy();
                   swiper.loopCreate();
@@ -164,13 +204,13 @@ const app = {
                 divError.innerHTML = 'Ошибка получения данных с ресурса: AccuWeather';
                 console.log(err);
             }
-            }, 30000);
+            }, 5000);
         },
         GetOpenWeatherAirData () {
           return 0
         },
         Todo (){
-          //this.GetYandexData();
+          this.GetYandexData();
           this.GetAccuWeatherForecast();
         }
     },

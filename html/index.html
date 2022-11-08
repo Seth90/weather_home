@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
     <link rel="stylesheet" href="../css/main.css">
-    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="../js/vue.global-3.2.36.js" defer></script>
     <script src="../js/app_vue.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="../js/swiper-bundle.min.js"></script>
     <script src="../js/app.js" defer></script>
+</head>
 <body>
     <div id="res"></div>
     <!-- weather -->
@@ -31,7 +32,7 @@
                     <div class="weather">
                         <div class="weather__current">
                             <div class="top">
-                                <img src="../imgs/01-s.png" alt="">
+                                <img :src="'../imgs/accu/' + icon" alt="">
                                 <div class="weather__main">
                                     {{currentTemp}}
                                 </div>
@@ -77,7 +78,7 @@
                                           <template v-for="item in accuForecast">
                                             <div class="weather__forecast-item">
                                               <div class="period">{{item.epochDate}}</div>
-                                              <img src="../imgs/1.png" alt="">
+                                              <img :src="'../imgs/accu/' + item.iconPath" alt="">
                                               <div class="temp">
                                                   <div class="temp__high">{{item.tempMax}}&deg;</div>
                                                   <div class="temp__low">{{item.tempMin}}&deg;</div>
@@ -93,7 +94,7 @@
                                         <div class="weather__forecast">
                                             <div class="weather__forecast-item mr20s">
                                                 <div class="period">{{parts[0].partName}}</div>
-                                                <img src="../imgs/1.png" alt="">
+                                                <img :src="'../imgs/accu/' + parts[0].icon" alt="">
                                                 <div class="temp">
                                                     <div class="temp__high">{{parts[0].tempMax}}&deg;</div>
                                                     <div class="temp__low">{{parts[0].tempMin}}&deg;</div>
@@ -102,7 +103,7 @@
                                             </div>
                                             <div class="weather__forecast-item">
                                                 <div class="period">{{parts[1].partName}}</div>
-                                                <img src="../imgs/1.png" alt="">
+                                                <img :src="'../imgs/accu/' + parts[1].icon" alt="">
                                                 <div class="temp">
                                                     <div class="temp__high">{{parts[1].tempMax}}&deg;</div>
                                                     <div class="temp__low">{{parts[1].tempMin}}&deg;</div>

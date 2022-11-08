@@ -89,8 +89,8 @@ body {
   justify-content: left;
   align-items: center;
   text-align: left;
-  font-size: 20px;
-  margin: 10px 0;
+  font-size: 15px;
+  margin: 10px 30px;
 }
 .weather__updatetime img {
   display: block;
@@ -120,19 +120,24 @@ body {
   margin-top: 15px;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: top;
   text-align: center;
   font-weight: normal;
 }
 .weather__forecast img {
-  width: 50px;
+  width: 83px;
   height: 50px;
+}
+
+.period {
+  margin-bottom: 5px;
 }
 
 .temp {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5px;
 }
 
 .temp__high {
