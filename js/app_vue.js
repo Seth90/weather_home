@@ -29,8 +29,9 @@ const app = {
                 condition: 'none'
             }
         ],
-        accuForecast: new Array(5).fill(
+        accuForecast: new Array(5).fill().map(item => (
           {
+            id: 0,
             date: "2022-11-07T07:00:00+03:00",
             epochDate: 1667793600,
             tempMin: -99,
@@ -38,7 +39,7 @@ const app = {
             icon: 12,
             iconPhrase: 'Rain'
           }
-        )
+        )),
       }
     },
     methods: {
@@ -76,8 +77,12 @@ const app = {
                   this.parts[1].tempMin = json.forecast.parts[1].temp_min;
                   this.parts[1].tempMax = json.forecast.parts[1].temp_max;
                   this.parts[1].condition = json.forecast.parts[1].condition;
+                  
                   console.log('GetYandexData - OK')
                   divError.classList.add('hidden');
+
+                  swiper.loopDestroy();
+                  swiper.loopCreate();
                 }
                 else {
                   divError.classList.remove('hidden');
@@ -92,29 +97,29 @@ const app = {
               
         },
         GetAccuWeatherForecast () {
+          const url = 'http://127.0.0.1:3000/accu_data';
           let divError = document.getElementsByClassName('errorMessages__accu')[0];
-            let options = {
-                method: 'GET',      
-                headers: {}
-              };
+          let options = {
+            method: 'GET',      
+            headers: {}
+          };
               
-            setInterval(async () => {
-              try {
-                const response = await fetch('http://127.0.0.1:3000/accu_data', options);
-                if (response.ok) {
+          setInterval(async () => {
+
+            try {
+              const response = await fetch(url, options);
+              if (response.ok) {
                   const json = await response.json();
                   json.DailyForecasts.forEach((item, i) => {
                     this.accuForecast[i].epochDate = item.EpochDate;
-                    console.log(i)
                     this.accuForecast[i].tempMin = item.Temperature.Minimum.Value;
-                    //console.log(this.accuForecast[i].tempMin)
                     this.accuForecast[i].tempMax = item.Temperature.Maximum.Value;
                     this.accuForecast[i].iconPhrase = item.Day.IconPhrase;
-                    //console.log(this.accuForecast[i].iconPhrase)
-                  });
-                 
+                  });           
                   console.log('GetAccuData - OK')
                   divError.classList.add('hidden');
+                  swiper.loopDestroy();
+                  swiper.loopCreate();
                 }
                 else {
                   divError.classList.remove('hidden');
@@ -125,14 +130,14 @@ const app = {
                 divError.classList.remove('hidden');
                 divError.innerHTML = 'Ошибка получения данных с ресурса: AccuWeather';
             }
-            }, 1000);
+            }, 5000);
         },
         GetOpenWeatherAirData () {
           return 0
         },
         Todo (){
-          //this.GetYandexData();
-          //this.GetAccuWeatherForecast();
+          this.GetYandexData();
+          this.GetAccuWeatherForecast();
         }
     },
     mounted: function(){

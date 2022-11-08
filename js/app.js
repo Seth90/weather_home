@@ -6,6 +6,9 @@ const swiper = new Swiper('.swiper', {
     delay: 2000,
   },
   on: {
+    
+  }
+  /*on: {
 
     slideChangeTransitionStart: function(swiper) {
         let $wrapperEl = swiper.$wrapperEl;
@@ -20,7 +23,7 @@ const swiper = new Swiper('.swiper', {
     slideChangeTransitionEnd: function(swiper) {
         swiper.slideToLoop(swiper.realIndex, 0, false);
     }
-}
+}*/
 });
 
 /*let options = {
