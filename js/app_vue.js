@@ -221,14 +221,19 @@ const app = {
   }
 
 
-Vue.createApp(app).mount('#app')
+Vue.createApp(app).mount('#app');
 
-setInterval(() => {
+SetTime() {
   let currentDate = new Date();
   console.log(currentDate);
   let minutes = currentDate.getMinutes() < 10 ? '0' + currentDate.getMinutes() : currentDate.getMinutes();
   document.getElementById('time').innerText = `${currentDate.getHours()}:${minutes}`;
   document.getElementById('dayOfWeek').innerText = `${weekdayFullTranslate[currentDate.getDay()]}`;
   document.getElementById('date').innerText = `${currentDate.getDate()} ${rusMonth[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+}
+
+SetTime();
+setInterval(() => {
+  SetTime();
 }, 30000);
 
