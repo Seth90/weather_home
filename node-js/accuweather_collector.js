@@ -21,14 +21,14 @@ const getData = () => {
     fetch(URL.replace('APIKEY', API_KEY), {headers : headers})
         .then(res => res.json())
         .then(json => {
-          if (fs.existsSync('./node-js/data')) {
-            fs.writeFile(`./node-js/data/${data_filename}`, JSON.stringify(json), (error) => {
+          if (fs.existsSync('./data')) {
+            fs.writeFile(`./data/${data_filename}`, JSON.stringify(json), (error) => {
               error ? console.log(error) : null;
           });
           }
           else {
-            fs.mkdir('./node-js/data', (error) => {
-                error ? console.log(error) : fs.writeFile(`./node-js/data/${data_filename}`, JSON.stringify(json), (error) => {
+            fs.mkdir('./data', (error) => {
+                error ? console.log(error) : fs.writeFile(`./data/${data_filename}`, JSON.stringify(json), (error) => {
                     error ? console.log(error) : null;
                 });
             })
